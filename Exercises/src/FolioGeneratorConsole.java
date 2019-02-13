@@ -88,7 +88,7 @@ public class FolioGeneratorConsole {
 							System.out.println("\nGenerated folio:\n"+folio);
 						}
 						
-						else {System.out.println( "Error state code '"+DDD+"' not found"); }
+						else {System.out.println( "Error, state code '"+DDD+"' not found"); }
 				
 						break;
 					}

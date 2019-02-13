@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
 
-public class FolioGenerator {
+class FolioGenerator {
 	
 	public static String secGen(int n){
 		

@@ -39,14 +39,6 @@ public class CatVsMouse {
 		Cat cat = new Cat();
 		
 		System.out.println("\n<Game Starts!>");
-	
-//		for (int i=0; i<5; i++) {
-//			for (int j=0; j<5; j++) {
-//				if(mouse.location[i][j]) { 
-//					System.out.println((i+1)+","+(j+1));
-//				}
-//			}
-//		}
 		
 		for (int i=0; i<5; i++) {
 			
@@ -154,7 +146,7 @@ public class CatVsMouse {
 			}
 			
 		} while (option.compareTo("E")!=0);
-		
+
 	}
 	
 }
