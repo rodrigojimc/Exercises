@@ -24,6 +24,8 @@ class Cat{
 
 public class CatVsMouse {
 
+	static Scanner scan = new Scanner(System.in);
+	
 	public static int play(){
 	
 		int win = 0;
@@ -32,7 +34,6 @@ public class CatVsMouse {
 		
 		boolean tries[][] = new boolean[5][5];
 		
-		Scanner scan = new Scanner(System.in);
 		String guess;
 		
 		Mouse mouse = new Mouse();
@@ -95,8 +96,6 @@ public class CatVsMouse {
 		if (win==1) { System.out.println("\nVICTORY! :D"); } 
 		else { System.out.println("\nDEFEAT :c"); };
 		
-		scan.close();
-		
 		return win;
 		
 	}
@@ -105,8 +104,7 @@ public class CatVsMouse {
 		
 		int timesPlayed = 0;
 		int timesWon = 0;
-		
-		Scanner scan = new Scanner(System.in);
+
 		String option;
 		
 		System.out.println("\n[CAT VS MOUSE]");
@@ -122,12 +120,12 @@ public class CatVsMouse {
 			
 			option = scan.next();
 			
-			if (option.compareTo("P")!=0 && option.compareTo("E")!=0) {
-				
-				System.out.println("\nInvalid Option!");
-				System.out.println("Please try again");
-				
-			}
+//			if (option.compareTo("P")!=0 && option.compareTo("E")!=0) {
+//				
+//				System.out.println("\nInvalid Option!");
+//				System.out.println("Please try again");
+//				
+//			}
 
 			switch (option) {
 			
@@ -145,6 +143,12 @@ public class CatVsMouse {
 				System.out.println("\n>>>>> Bye >>>>>");
 				
 				break;
+			
+			default:
+				
+				System.out.println("\nInvalid Option!");
+				System.out.println("Please try again");
+				
 			}
 			
 		} while (option.compareTo("E")!=0);
