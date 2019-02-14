@@ -5,22 +5,26 @@ import java.util.Random;
 
 class SlotMachine {
 	
-	private Scanner scan = new Scanner(System.in);
-	private Random random = new Random();
+	private Scanner scan;
+	private Random random;
 	
 	private int credits;
 	private int bet;
 	
-	private int combination[] = new int[4];
+	private int combination[];
 	
 	private String input;
 	private boolean validOption;
 	
 	SlotMachine(){
 		
+		this.scan = new Scanner(System.in);
+		this.random = new Random();
+		
 		this.credits = 0;
 		this.bet = 1;
 		
+		this.combination = new int[3];
 		for (int i=0; i<3; i++) { this.combination[i] = 4; }
 		
 	}
@@ -32,14 +36,20 @@ class SlotMachine {
 		int fours = 0;
 		
 		if (combination[0]==combination[1] && combination[1]==combination[2]) {
+			
 			if (combination[0]==4) { payout = 30; }
 			else { payout = 10; }	
+			
 		} 
 		
 		else {
+			
 			for(int i=0; i<3; i++) {
+				
 				if (combination[i] == 4) { fours++; }
+				
 			}
+			
 			if (fours == 1) { payout = 1; }
 			else if (fours == 2) { payout = 4; }
 		}
@@ -118,12 +128,12 @@ class SlotMachine {
 			System.out.print("\nNew bet: ");
 			input = scan.next();
 			
-			if (!input.matches("[12345]")) {
+			if (!input.matches("[123]")) {
 				
 				validOption = false;
 				
 				System.out.println("\nBet must be a");
-				System.out.println("number from 1 to 5");
+				System.out.println("number from 1 to 3");
 				
 			}
 			
@@ -146,6 +156,7 @@ class SlotMachine {
 			System.out.println("Come back later!");
 			
 			credits = 0;
+			bet=1;
 			
 		}
 		
@@ -165,9 +176,7 @@ class SlotMachine {
 			
 			credits -= bet;
 			
-			for (int i=0; i<3; i++) {
-				combination[i] = random.nextInt(6);
-			}
+			for (int i=0; i<3; i++) { combination[i] = random.nextInt(6); }
 			
 			payout = bet*prize();
 			credits += payout;
@@ -175,18 +184,26 @@ class SlotMachine {
 			switch (payout){
 			
 			case 0:
+				
 				System.out.println("\nBetter luck next time!");
+				
 				break;
+				
 			case 1:
+				
 				System.out.println("\nYou won 1 credit!");
+				
 				break;
+				
 			default:
+				
 				System.out.println("\nYou won "+payout+" credits!");
+				
 			}
+			
 		}
-		else {
-			System.out.println("\nNo enought credits!");
-		}
+		
+		else { System.out.println("\nNo enought credits!"); }
 		
 	}
 	
@@ -198,6 +215,7 @@ class SlotMachine {
 			printMenu();
 		
 			input = scan.next();
+			input = input.toUpperCase(); 
 			
 			switch (input) {
 			

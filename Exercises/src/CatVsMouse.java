@@ -6,7 +6,7 @@ import java.util.Scanner;
 class Mouse{
 	
 	boolean location[][] = new boolean[5][5];
-	Random random = new Random();
+	private Random random = new Random();
 	
 	Mouse() { 
 		
@@ -22,13 +22,26 @@ class Cat{
 	
 }
 
-public class CatVsMouse {
+class Game{
 
-	static Scanner scan = new Scanner(System.in);
+	private Scanner scan;
 	
-	public static int play(){
+	private int timesPlayed;
+	private int timesWon;
+	
+	Game(){
+	
+		this.scan = new Scanner(System.in);
+		
+		this.timesPlayed = 0;
+		this.timesWon = 0;
+		
+	}
+	
+	public int play(int chances){
 	
 		int win = 0;
+		
 		int x = 0;
 		int y = 0;
 		
@@ -41,10 +54,10 @@ public class CatVsMouse {
 		
 		System.out.println("\n<Game Starts!>");
 		
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<chances; i++) {
 			
 			do {
-				System.out.println("\nTries left: "+(5-i));
+				System.out.println("\nTries left: "+(chances-i));
 				System.out.print("Coordinates: ");
 				
 				guess = scan.next();
@@ -100,12 +113,10 @@ public class CatVsMouse {
 		
 	}
 	
-	public static void main(String[] args) {
+	public void start() {
 		
-		int timesPlayed = 0;
-		int timesWon = 0;
-
-		String option;
+		//Scanner scan = new Scanner(System.in);
+		String input;
 		
 		System.out.println("\n[CAT VS MOUSE]");
 		System.out.println(" - The Game - ");
@@ -118,14 +129,15 @@ public class CatVsMouse {
 			System.out.println("---------------");
 			System.out.print("Option: ");
 			
-			option = scan.next();
+			input = scan.next();
+			input = input.toUpperCase(); 
 
-			switch (option) {
+			switch (input) {
 			
 			case "P":
 				
 				timesPlayed++;
-				timesWon+=play();
+				timesWon+=play(5);
 				
 				break;
 			
@@ -144,9 +156,20 @@ public class CatVsMouse {
 				
 			}
 			
-		} while (option.compareTo("E")!=0);
+		} while (input.compareTo("E")!=0);
 
 		scan.close();
+		
+	}
+	
+}
+
+public class CatVsMouse {
+
+	public static void main(String args[]) {
+		
+		Game game = new Game();
+		game.start();
 		
 	}
 	

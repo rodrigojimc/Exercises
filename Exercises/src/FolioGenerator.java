@@ -5,9 +5,16 @@ import java.io.*;
 
 class FolioGenerator {
 	
-	public static String secGen(int n){
+	private Random random;
+	
+	FolioGenerator(){
 		
-		Random random = new Random();
+		this.random = new Random();
+		
+	}
+	
+	private String secGen(int n){
+		
 		int aux;
 		int range;
 		
@@ -30,24 +37,26 @@ class FolioGenerator {
 		return folioS;
 	}
 	
-	public static String folioGen(String dBName){
+	
+	public String generateFolio(String dBName){
 		
 		String folio;
 		
-		do { folio = secGen(9)+"-"+secGen(8)+"-"+secGen(7); } while (FolioGenerator.folioInDB(folio, dBName));
+		do { folio = secGen(9)+"-"+secGen(8)+"-"+secGen(7); } while (folioInDB(folio, dBName));
 		
-		FolioGenerator.addFolioToDB(folio, dBName);
+		addFolioToDB(folio, dBName);
 		
 		return folio;
 		
 	}
 	
-	public static String folioGen(String dBName, String DDD, String stateCodes){
+	public String generateFolio(String dBName, String DDD, String stateCodes){
 		
 		String line = null;
 		boolean found = false;
 		
 		String folio = "NONE";
+		DDD = DDD.toUpperCase();
 		
 		try{
 			
@@ -70,9 +79,9 @@ class FolioGenerator {
 		
 		if(found) {
 			
-			do { folio = DDD+secGen(9)+"-"+secGen(8)+"-"+secGen(7); } while (FolioGenerator.folioInDB(folio, dBName));
+			do { folio = DDD+secGen(9)+"-"+secGen(8)+"-"+secGen(7); } while (folioInDB(folio, dBName));
 			
-			FolioGenerator.addFolioToDB(folio, dBName);
+			addFolioToDB(folio, dBName);
 		}
 		
 		else {System.out.println( "Error, state code '"+DDD+"' not found"); }
@@ -82,7 +91,8 @@ class FolioGenerator {
 		return folio;
 	}
 	
-	public static boolean folioInDB(String folio, String fileName ) {
+	
+	private boolean folioInDB(String folio, String fileName ) {
 		
 		String line = null;
 		boolean found = false;
@@ -109,7 +119,7 @@ class FolioGenerator {
 		return found;
 	}
 	
-	public static void addFolioToDB(String folio, String fileName) {
+	private void addFolioToDB(String folio, String fileName) {
 		
 		try{
 			
