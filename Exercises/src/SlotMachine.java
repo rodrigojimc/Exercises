@@ -3,22 +3,30 @@
 import java.util.Scanner;
 import java.util.Random;
 
-public class SlotMachine {
+class SlotMachine {
 	
-	private static int credits = 0;
-	private static int bet = 1;
+	private Scanner scan = new Scanner(System.in);
+	private Random random = new Random();
 	
-	private static Scanner scan = new Scanner(System.in);
-	private static String input;
-	private static boolean validOption;
+	private int credits;
+	private int bet;
 	
-	private static Random random = new Random();
-	private static int combination[] = {4,4,4};
+	private int combination[] = new int[4];
 	
-	private static int payout;
+	private String input;
+	private boolean validOption;
+	
+	SlotMachine(){
+		
+		this.credits = 0;
+		this.bet = 1;
+		
+		for (int i=0; i<3; i++) { this.combination[i] = 4; }
+		
+	}
 	
 	
-	private static int prize (int combination[]) {
+	private int prize () {
 		
 		int payout = 0;
 		int fours = 0;
@@ -40,7 +48,7 @@ public class SlotMachine {
 	}
 	
 	
-	private static void printMenu() {
+	private void printMenu() {
 		
 		System.out.println("\n| [4th SLOT!] |");
 		System.out.println("---------------");
@@ -60,7 +68,7 @@ public class SlotMachine {
 		
 	}
 	
-	private static void printRules() {
+	private void printRules() {
 		
 		System.out.println("\nCombination\tPays");
 		System.out.println("----------------------");
@@ -72,7 +80,8 @@ public class SlotMachine {
 	}
 
 	
-	private static void addCredits(){
+	private void addCredits(){
+		
 		
 		do {
 			
@@ -99,7 +108,10 @@ public class SlotMachine {
 		
 	}
 	
-	private static void setBet() {
+	private void setBet() {
+		
+		String input;
+		boolean validOption;
 		
 		do {
 			
@@ -124,31 +136,40 @@ public class SlotMachine {
 			
 		} while(!validOption);
 		
-		
 	}
 	
-	private static void cash() {
+	private void cash() {
 		
 		if (credits>0) {
 			
 			System.out.println("\nCredits payed: "+credits);
 			System.out.println("Come back later!");
 			
+			credits = 0;
+			
 		}
+		
+		else {
+			
+			System.out.println("No credits!");
+			
+		}
+		
 	}
 	
-	
-	private static void play() {
+ 	private void play() {
+		
+		int payout;
 		
 		if (credits >= bet) {
 			
 			credits -= bet;
 			
 			for (int i=0; i<3; i++) {
-				combination[i] =random.nextInt(6);
+				combination[i] = random.nextInt(6);
 			}
 			
-			payout = bet*prize(combination);
+			payout = bet*prize();
 			credits += payout;
 
 			switch (payout){
@@ -170,8 +191,8 @@ public class SlotMachine {
 	}
 	
 
-	public static void main(String[] args) {
-
+	public void turnOn() {
+		
 		do {
 		
 			printMenu();
