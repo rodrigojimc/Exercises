@@ -1,10 +1,8 @@
 // @author RodrigoJimenezCorrea
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.*;
 
 public class FolioGeneratorConsole {
 
@@ -46,9 +44,7 @@ public class FolioGeneratorConsole {
 			
 					case "O":
 				
-						do { folio = FolioGenerator.folioGen(); } while (FolioGenerator.folioInDB(folio, oldDB));
-				
-						FolioGenerator.addFolioToDB(folio, oldDB);
+						folio = FolioGenerator.folioGen(oldDB);
 						System.out.println("\nGenerated folio:\n"+folio);
 				
 						break;
@@ -57,44 +53,17 @@ public class FolioGeneratorConsole {
 				
 						System.out.print("\nState code: ");
 						DDD = scan.next();
-						
-						String line = null;
-						boolean found = false;
-						
-						try{
-							
-							FileReader fileReader = new FileReader(stateCodes);
-							BufferedReader bufferedReader =  new BufferedReader(fileReader);
-							
-							do{
-								line = bufferedReader.readLine();
-								
-								if (line!=null && DDD.compareTo(line) == 0) { found = true; }
-								
-							} while(!found && line != null);
-							
-							bufferedReader.close(); 
-						}
-						
-						catch(IOException ex) {
-							System.out.println( "Error reading file '"+stateCodes+"'");
-						}
-						
-						if(found) {
-							
-							do { folio = FolioGenerator.folioGen(DDD); } while (FolioGenerator.folioInDB(folio, newDB));
-							
-							FolioGenerator.addFolioToDB(folio, newDB);
-							System.out.println("\nGenerated folio:\n"+folio);
-						}
-						
-						else {System.out.println( "Error, state code '"+DDD+"' not found"); }
-				
+												
+						folio = FolioGenerator.folioGen(newDB, DDD, stateCodes);
+						System.out.println("\nGenerated folio:\n"+folio);
+
 						break;
 					}
 		
 			}while(!validOption);
 
 		} while(input.compareTo("E")!=0);
+			
 	}
+	
 }

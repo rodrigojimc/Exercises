@@ -1,8 +1,6 @@
 // @author RodrigoJimenezCorrea
 
-import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 import java.io.*;
 
 class FolioGenerator {
@@ -32,12 +30,56 @@ class FolioGenerator {
 		return folioS;
 	}
 	
-	public static String folioGen(){
-		return secGen(9)+"-"+secGen(8)+"-"+secGen(7); 
+	public static String folioGen(String dBName){
+		
+		String folio;
+		
+		do { folio = secGen(9)+"-"+secGen(8)+"-"+secGen(7); } while (FolioGenerator.folioInDB(folio, dBName));
+		
+		FolioGenerator.addFolioToDB(folio, dBName);
+		
+		return folio;
+		
 	}
 	
-	public static String folioGen(String DDD){
-		return DDD+secGen(9)+"-"+secGen(8)+"-"+secGen(7);
+	public static String folioGen(String dBName, String DDD, String stateCodes){
+		
+		String line = null;
+		boolean found = false;
+		
+		String folio = "NONE";
+		
+		try{
+			
+			FileReader fileReader = new FileReader(stateCodes);
+			BufferedReader bufferedReader =  new BufferedReader(fileReader);
+			
+			do{
+				line = bufferedReader.readLine();
+				
+				if (line!=null && DDD.compareTo(line) == 0) { found = true; }
+				
+			} while(!found && line != null);
+			
+			bufferedReader.close(); 
+		}
+		
+		catch(IOException ex) {
+			System.out.println( "Error reading file '"+stateCodes+"'");
+		}
+		
+		if(found) {
+			
+			do { folio = DDD+secGen(9)+"-"+secGen(8)+"-"+secGen(7); } while (FolioGenerator.folioInDB(folio, dBName));
+			
+			FolioGenerator.addFolioToDB(folio, dBName);
+		}
+		
+		else {System.out.println( "Error, state code '"+DDD+"' not found"); }
+		
+		
+		
+		return folio;
 	}
 	
 	public static boolean folioInDB(String folio, String fileName ) {
@@ -83,6 +125,7 @@ class FolioGenerator {
 		catch(IOException ex) {
 			System.out.println( "Error writing to file '"+fileName+"'");
 		}
+			
 	}
 	
 }
