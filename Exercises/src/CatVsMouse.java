@@ -119,13 +119,6 @@ public class CatVsMouse {
 			System.out.print("Option: ");
 			
 			option = scan.next();
-			
-//			if (option.compareTo("P")!=0 && option.compareTo("E")!=0) {
-//				
-//				System.out.println("\nInvalid Option!");
-//				System.out.println("Please try again");
-//				
-//			}
 
 			switch (option) {
 			
