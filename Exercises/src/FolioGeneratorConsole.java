@@ -2,7 +2,6 @@
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.io.*;
 
 public class FolioGeneratorConsole {
 
@@ -64,6 +63,8 @@ public class FolioGeneratorConsole {
 
 		} while(input.compareTo("E")!=0);
 			
+		scan.close();
+		
 	}
 	
 }

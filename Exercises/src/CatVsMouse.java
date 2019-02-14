@@ -95,6 +95,8 @@ public class CatVsMouse {
 		if (win==1) { System.out.println("\nVICTORY! :D"); } 
 		else { System.out.println("\nDEFEAT :c"); };
 		
+		scan.close();
+		
 		return win;
 		
 	}
@@ -147,6 +149,8 @@ public class CatVsMouse {
 			
 		} while (option.compareTo("E")!=0);
 
+		scan.close();
+		
 	}
 	
 }

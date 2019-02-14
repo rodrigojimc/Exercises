@@ -195,6 +195,8 @@ public class SlotMachine {
 			
 		} while(input.compareTo("T")!=0);
 		
+		scan.close();
+		
 	}
 
 }
